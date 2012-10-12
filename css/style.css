@@ -1,0 +1,21 @@
+/* CSS Document */
+
+
+body{background:url('../images/stars.jpg');}
+canvas{
+	margin:0px auto;
+}
+#controls{font:bold 24px sans-serif;
+        text-decoration:none;
+        color:#fff;
+}
+
+#canvasWrap{
+	width: 960px;
+	height: 700px;
+	margin: -700px 0px 0px -480px;
+	position: absolute;
+	top: 100%;
+	overflow: hidden;
+	left: 50%;
+}

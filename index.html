@@ -2,24 +2,19 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Canvas Test</title>
+<title>Alien Invaders</title>
 
 <script src="http://cache.university-bound.com/JScript/jquery-1.7.1.min.js"></script>
 <script src="js/mousetrap.min.js"></script>
-<style>
-#canvas{
-	background:green;
-
-}
-#canvasWrap{
-	margin:0px;
-}
-</style>
+<script src="js/lightbox.js"></script>
+<link href="css/lightbox.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body onresize = "redraw();">
+<body>
+<a id="controls" href="images/controls.png" rel="lightbox" title="Controls">View Controls</a>
 <div id="canvasWrap">
-<canvas id="canvas" width="960px" height="700px"></canvas>
+
 </div><!--Closes CanvasWrap-->
 <script src="js/object.js"></script>
 <script src="js/script.js"></script>

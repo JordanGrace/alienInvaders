@@ -12,20 +12,24 @@ var alienHeight = 25;
 var paddleh = 30;
 var paddlew = 50;
 //Changes the Number of rows of aliens "Has to be Odd"
-var nRows;
+var nRows = 9;
 //Changes the Number of Columns of aliens "Has to be Even"
-var nCols;
+var nCols = 20;
 //Changes the Number of Barriers "Has to be Odd"
-var nBarriers;
+var nBarriers = 9;
 //Changes the Amount of Lives you can have
 var userLives = 3;
+//Sets the Width of the canvas
+var WIDTH = 960;
+//Sets the Height of the canvas
+var HEIGHT = 700;
+
 /*----------------------------------Changes to the Variables below may break game----------------------------------*/
-var aliensAlive;
+var canvas = document.createElement('canvas');
+var aliensAlive = ((nRows + 1) * nCols)/4 ;
 var x = 0;
 var y = 0;
 var ctx;
-var WIDTH;
-var HEIGHT;
 var paddlex;
 var intervalId = 0;
 var nextLvl = 0;
@@ -49,6 +53,7 @@ downDown = false;
 testDown = false;
 moveObj = false;
 eMfire = false;
+var ctt = 0;
 var playerBullets = [];
 var enemyBullets = [];
 
@@ -61,14 +66,14 @@ function Bullet(I) {
 	I.radius = 3;
 	I.xVelocity = 0;
 	I.yVelocity = -I.speed;
-	I.color = "#000";
+	I.color = "white";
 	I.inBounds = function() {
 		return I.x >= 0 && I.x <= WIDTH && I.y >= 0 && I.y <= HEIGHT;
 	};
 	I.draw = function() {
 		if(I.active == true){
 			ctx.beginPath();
-			ctx.fillStyle = "white";
+			ctx.fillStyle = 'white';
 			ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 			//rect(this.x, this.y,3,5);
 			ctx.closePath();
@@ -86,14 +91,14 @@ function Bullet(I) {
 
 //Creating the player
 var Player = {
-	color: "#00A",
+	color: "white",
 	x: paddlex,
 	y: HEIGHT-paddleh,
 	width: paddlew,
 	height: paddleh,
 	draw: function() {
 		ctx.beginPath();
-		ctx.fillStyle = "#000";
+		ctx.fillStyle = "white";
 		ctx.rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
 		ctx.closePath();
 		ctx.fill();
@@ -112,7 +117,7 @@ function circle(x,y,r) {
 //Used for the barriers and the aliens
 function rect(x,y,w,h){
 	ctx.beginPath();
-	ctx.fillStyle = "black";
+	ctx.fillStyle = "white";
 	ctx.rect(x,y,w,h);
 	ctx.closePath();
 	ctx.fill();
@@ -128,22 +133,29 @@ alienImg.src = '../alienInvaders/images/alien.png';
 function winner(){
 	ctx.beginPath();
 	ctx.font = "bold 30px sans-serif";
-	ctx.fillStyle = "black";
+	ctx.fillStyle = "white";
 	ctx.fillText("Get Ready for the next round!", textPosX, (HEIGHT/2));
 	ctx.closePath();
-	clearInterval(intervalId);
-	alienDown = alienHeight*2;
-	alienMove = 0;
-	startLevel ++;
-	aliensAlive = ((nRows + 1)/2)*(nCols/2);
-	refresh();
+		
+		
+	var st = setTimeout(function(){
+		
+		alienDown = alienHeight*2;
+		alienMove = 0;
+		startLevel ++;
+		aliensAlive = ((nRows + 1) * nCols)/4 ;
+		playerBullets = [];
+                clearTimeout(st);
+		winRefresh();
+
+	},3000);
 }
 //Lose Test
 function lose(){
 	ctx.beginPath();
 	ctx.font = "bold 60px sans-serif";
-	ctx.fillStyle = "black";
-	ctx.fillText("Game Over", ((WIDTH/2)-180), (HEIGHT/2));
+	ctx.fillStyle = "white";
+	ctx.fillText("Game Over", ((WIDTH*.5)-180), (HEIGHT*.5));
 	ctx.closePath();
 	clearInterval(intervalId);
 }
@@ -162,9 +174,10 @@ function clear() {
 
 
 function init() {
-  ctx = $('#canvas')[0].getContext("2d");
-  WIDTH = $("#canvas").width()
-  HEIGHT = $("#canvas").height()
+  canvas.height = HEIGHT;
+  canvas.width = WIDTH;
+  ctx = canvas.getContext("2d");
+  $('#canvasWrap').append(canvas);
   paddlex = 0;
   x = paddlex + (paddlew/2);
   y = (HEIGHT-paddleh)+10;

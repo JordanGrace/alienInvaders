@@ -1,16 +1,9 @@
 //Level Difficulty
 switch(startLevel){
 case 1:
-var nRows = 3;
-var nCols = 10;
-var nBarriers = 11;
-aliensAlive = ((nRows + 1)/2)*(nCols/2);
+
 break;
 case 2:
-var nRows = 9;
-var nCols = 20;
-var nBarriers = 9;
-aliensAlive = ((nRows + 1)/2)*(nCols/2);
 break;
 case 3:
 
@@ -184,10 +177,10 @@ ap4x[i] = new Array(nCols);
 		for (j=0; j < nCols; j++) {
 			if(j%2==0){}
 			else{
-			ap1x[i][j] = (j * alienWidth) + alienMove - 3;
-			ap2y[i][j] = ((i+1) * alienHeight) + alienD;
-			ap3y[i][j] = (((i+1) * alienHeight) + alienHeight) + alienD;
-			ap4x[i][j] = ((j * alienWidth) + alienWidth) + alienMove + 3;
+				ap1x[i][j] = (j * alienWidth) + alienMove - 3;
+				ap2y[i][j] = ((i+1) * alienHeight) + alienD;
+				ap3y[i][j] = (((i+1) * alienHeight) + alienHeight) + alienD;
+				ap4x[i][j] = ((j * alienWidth) + alienWidth) + alienMove + 3;
 			}
 		}
 	}
@@ -239,7 +232,7 @@ eMfire = false;
 if(paddlex < eMx && (HEIGHT - paddleh) < eMy && HEIGHT > eMy && (paddlex + paddlew) > eMx){
 	hitU();
 }
-
+console.log(alienSpeed);
 switch(aliensAlive){
 case 20:
 alienSpeed = 2.5;
@@ -379,11 +372,12 @@ for (i=0; i < nRows; i++) {
 }/*The End of the Draw Function*/
 
 //sends back to object.js
-function refresh(){
-init();
-initALIENS();
-initBarriers();
-
+function winRefresh(){
+ctt++;
+if(ctt >= 70){
+  initALIENS();
+  initBarriers();
+}
 }
 
 init();
