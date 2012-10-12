@@ -49,6 +49,8 @@ function initBarriers() {
 	}
 }
 
+
+
 //Drawing on the canvas      
 function draw() {
 
@@ -56,11 +58,10 @@ function draw() {
 	clear();
 	
 	playerBullets.forEach(function(Bullet) {
-    Bullet.draw();})
+    Bullet.draw();});
 	
 	playerBullets.forEach(function(Bullet) {
-    Bullet.update();
-  });
+    Bullet.update();});
 	
 /*--------------- U S E R   C O D E ---------------*/  
 //If no key is pressed key will equal none
@@ -74,31 +75,32 @@ Mousetrap.bind('left', function(){key = "left";}, 'keydown');
 Mousetrap.bind('right', function(){key = "right";}, 'keydown');
 Mousetrap.bind('up', function(){key = "up";}, 'keydown');
 Mousetrap.bind('down', function(){key = "down";}, 'keydown');
-Mousetrap.bind('a', function(){key = "test";}, 'keydown');
+Mousetrap.bind('p', function(){key = "pause";}, 'keydown');
 
 Mousetrap.bind('left', function(){stopMove();}, 'keyup');
 Mousetrap.bind('right', function(){stopMove();}, 'keyup');
 Mousetrap.bind('up', function(){stopMove();}, 'keyup');
 Mousetrap.bind('down', function(){stopMove();}, 'keyup');
-Mousetrap.bind('a', function(){stopMove();}, 'keyup');
+Mousetrap.bind('p', function(){stopMove();}, 'keyup');
 
 //giving the keyboard binding some functions
 switch(key){
 	case "right":
-		if(paddlex >= (WIDTH - paddlew)){}
-		else{paddlex += 5;}
-		break;
+		if(shipx >= (WIDTH - paddlew)){}
+		else{shipx += 5;}
+	break;
 	case "left":
-		if(paddlex <= 0){}
-		else{paddlex -= 5;}
-		break;		
+		if(shipx <= 0){}
+		else{shipx -= 5;}
+	break;		
 	case "up":   
 		y -= 5;
-		break;		
+	break;		
 	case "down":
 		y += 5;
-		break;		
-	case "test":
+	break;		
+	case "pause":
+		pauseGame();
 	break;			
  }
 
@@ -109,7 +111,7 @@ function fire(){
 		score --;
 		playerBullets.push(Bullet({
 			number: playerBullets.length,
-			x: paddlex + (paddlew/2),
+			x: shipx + (paddlew/2),
 			y: (HEIGHT-paddleh)+10,
 			speed: 5
 		}));
@@ -122,30 +124,25 @@ Player.draw();
 
 /*--------------- A L I E N   C O D E ---------------*/
 //Alien Moving Animation
-//if the alien his the right wall move down and move left
 
 var count = 0;
 
 for(c=(nCols-1); c > 0; c-=2){
 	for(r=0; r < nRows; r+=2){
+		//if the alien hits the right wall
 		if(ALIENS[r][c] == 1 && alienMove >= WIDTH - ((nCols * alienWidth) + (((c - nCols)+1) * alienWidth))){
 				moveObj = true;	
 				count ++;
 				if(count == 1){alienDown += alienHeight;}
 		}
-	}
-}
-//if the alien his the left wall move down and move right
-for(c=0; c < nCols; c++){
-	for(r=0; r < nRows; r+=2){	
-		if(ALIENS[r][c] == 1 && alienMove <= (0 - (alienWidth * c))){
+		//if the alien hits the left wall
+		else if(ALIENS[r][c] == 1 && alienMove <= (0 - (alienWidth * c))){
 				moveObj = false;
 				count ++;
 				if(count == 1){alienDown += alienHeight;}
 		}
 	}
 }
-
 
 //makes the aliens move in opposite direction
  if(moveObj){alienMove -= alienSpeed;count=0;}
@@ -212,15 +209,15 @@ eMy += dy;
 
 //Checks to see if the Enemy Missle has been fired
 if(!eMfire){
-eMx = -20;
-eMy = 0;
+	eMx = -20;
+	eMy = 0;
 	cn = Math.floor(Math.random()*nCols);
 	rn = Math.floor(Math.random()*nRows);
 	//Checks to see if the ship is still valid
 	if(cn%2 == 1 && rn%2 == 0 && ALIENS[rn][cn]== 1){
-	eMy = (((ap3y[rn][cn] - ap2y[rn][cn])/2) + ap2y[rn][cn]);
-	eMx = (((ap4x[rn][cn] - ap1x[rn][cn])/2) + ap1x[rn][cn]);
-	eMfire = true;
+		eMy = (((ap3y[rn][cn] - ap2y[rn][cn])/2) + ap2y[rn][cn]);
+		eMx = (((ap4x[rn][cn] - ap1x[rn][cn])/2) + ap1x[rn][cn]);
+		eMfire = true;
 	}
 }
 if(ALIENS[rn][cn]== 1){circle(eMx, eMy, bulletSize);}
@@ -229,22 +226,21 @@ if(eMy >= HEIGHT){
 eMfire = false;
 }
 
-if(paddlex < eMx && (HEIGHT - paddleh) < eMy && HEIGHT > eMy && (paddlex + paddlew) > eMx){
+if(shipx < eMx && (HEIGHT - paddleh) < eMy && HEIGHT > eMy && (shipx + paddlew) > eMx){
 	hitU();
 }
-console.log(alienSpeed);
 switch(aliensAlive){
 case 20:
-alienSpeed = 2.5;
+alienSpeed = alienSpeed+2.5;
 break;
 case 15:
-alienSpeed = 3;
+alienSpeed = alienSpeed+3;
 break;
 case 10:
-alienSpeed = 3.5;
+alienSpeed = alienSpeed+3.5;
 break;
 case 5:
-alienSpeed = 5;
+alienSpeed = alienSpeed+5;
 break;
 }
 /*--------------- E N D	  A L I E N   C O D E ---------------*/
@@ -314,7 +310,7 @@ for (b=0; b < nBarriers; b++) {
  //This is the Hit function for aliens
 function hit(row, col){
 	y =(HEIGHT-paddleh)+5;
-	x = paddlex + (paddlew/2);
+	x = shipx + (paddlew/2);
 	fireMissle = false;
 	ALIENS[row][col] = 0;
 	aliensAlive --;
@@ -324,7 +320,7 @@ function hit(row, col){
 function hitB(b){
 	barrier[b] -= 1;
 	y = (HEIGHT-paddleh)+5;
-	x = paddlex + (paddlew/2);
+	x = shipx + (paddlew/2);
 	fireMissle = false;
 }
 //Hit Function for barrier from the Enemy Missle

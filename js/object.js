@@ -30,7 +30,7 @@ var aliensAlive = ((nRows + 1) * nCols)/4 ;
 var x = 0;
 var y = 0;
 var ctx;
-var paddlex;
+var shipx;
 var intervalId = 0;
 var nextLvl = 0;
 var ALIENS;
@@ -46,11 +46,6 @@ var eMy = 0;
 var eMx = 0;
 var firePause = false;
 fireMissle = false;
-rightDown = false;
-leftDown = false;
-upDown = false;
-downDown = false;
-testDown = false;
 moveObj = false;
 eMfire = false;
 var ctt = 0;
@@ -92,14 +87,14 @@ function Bullet(I) {
 //Creating the player
 var Player = {
 	color: "white",
-	x: paddlex,
+	x: shipx,
 	y: HEIGHT-paddleh,
 	width: paddlew,
 	height: paddleh,
 	draw: function() {
 		ctx.beginPath();
-		ctx.fillStyle = "white";
-		ctx.rect(paddlex, HEIGHT-paddleh, paddlew, paddleh);
+		ctx.fillStyle = Player.color;
+		ctx.rect(shipx, HEIGHT-paddleh, paddlew, paddleh);
 		ctx.closePath();
 		ctx.fill();
 	}
@@ -139,15 +134,13 @@ function winner(){
 		
 		
 	var st = setTimeout(function(){
-		
 		alienDown = alienHeight*2;
 		alienMove = 0;
 		startLevel ++;
 		aliensAlive = ((nRows + 1) * nCols)/4 ;
 		playerBullets = [];
-                clearTimeout(st);
+        clearTimeout(st);
 		winRefresh();
-
 	},3000);
 }
 //Lose Test
@@ -167,19 +160,19 @@ function txt(words, x, y){
 	ctx.fillText(words, x, y);
 	ctx.closePath();
 }
-
+//Clears Objects
 function clear() {
 	ctx.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
-
+//The Start Function
 function init() {
   canvas.height = HEIGHT;
   canvas.width = WIDTH;
   ctx = canvas.getContext("2d");
   $('#canvasWrap').append(canvas);
-  paddlex = 0;
-  x = paddlex + (paddlew/2);
+  shipx = 0;
+  x = shipx + (paddlew/2);
   y = (HEIGHT-paddleh)+10;
   intervalId = setInterval(draw, 1000/30);
   return intervalId;
