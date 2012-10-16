@@ -24,6 +24,9 @@ var WIDTH = 960;
 //Sets the Height of the canvas
 var HEIGHT = 700;
 
+var alienImage = '../alienInvaders/images/alien.png';
+var shipImage = '';
+
 /*----------------------------------Changes to the Variables below may break game----------------------------------*/
 var canvas = document.createElement('canvas');
 var aliensAlive = ((nRows + 1) * nCols)/4 ;
@@ -45,9 +48,8 @@ var rn = 4;
 var eMy = 0;
 var eMx = 0;
 var firePause = false;
-fireMissle = false;
-moveObj = false;
-eMfire = false;
+var moveObj = false;
+var eMfire = false;
 var ctt = 0;
 var playerBullets = [];
 var enemyBullets = [];
@@ -122,7 +124,7 @@ var alienImg = new Image();
 function aImg(x,y,w,h){
 	ctx.drawImage(alienImg,x,y,w,h);
 }
-alienImg.src = '../alienInvaders/images/alien.png';
+alienImg.src = alienImage;
 
 //Win Text
 function winner(){

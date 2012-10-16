@@ -1,20 +1,16 @@
 //Level Difficulty
-switch(startLevel){
-case 1:
-
-break;
-case 2:
-break;
-case 3:
-
-break;
-case 4:
-
-break;
-case 5:
-
-break;
-}
+/*switch(startLevel){
+	case 1:
+	break;
+	case 2:
+	break;
+	case 3:
+	break;
+	case 4:
+	break;
+	case 5:
+	break;
+}*/
 
 //Creation of the Aliens
 function initALIENS() {
@@ -52,7 +48,7 @@ function initBarriers() {
 
 
 //Drawing on the canvas      
-function draw() {
+function draw(){
 
 	//Clears the Canvas to redraw
 	clear();
@@ -107,7 +103,6 @@ switch(key){
 
 //If fireMissle is true the missle is not able to be moved
 function fire(){
-		//firePause = true;
 		score --;
 		playerBullets.push(Bullet({
 			number: playerBullets.length,
@@ -129,13 +124,13 @@ var count = 0;
 
 for(c=(nCols-1); c > 0; c-=2){
 	for(r=0; r < nRows; r+=2){
-		//if the alien hits the right wall
+//if the alien hits the right wall
 		if(ALIENS[r][c] == 1 && alienMove >= WIDTH - ((nCols * alienWidth) + (((c - nCols)+1) * alienWidth))){
 				moveObj = true;	
 				count ++;
 				if(count == 1){alienDown += alienHeight;}
 		}
-		//if the alien hits the left wall
+//if the alien hits the left wall
 		else if(ALIENS[r][c] == 1 && alienMove <= (0 - (alienWidth * c))){
 				moveObj = false;
 				count ++;
@@ -166,10 +161,10 @@ ap2y = new Array(nRows);
 ap3y = new Array(nRows);
 ap4x = new Array(nRows);
 for (i=0; i < nRows; i++) {
-ap1x[i] = new Array(nCols);
-ap2y[i] = new Array(nCols);
-ap3y[i] = new Array(nCols);
-ap4x[i] = new Array(nCols);
+	ap1x[i] = new Array(nCols);
+	ap2y[i] = new Array(nCols);
+	ap3y[i] = new Array(nCols);
+	ap4x[i] = new Array(nCols);
 	if(i%2==0){
 		for (j=0; j < nCols; j++) {
 			if(j%2==0){}
@@ -229,19 +224,21 @@ eMfire = false;
 if(shipx < eMx && (HEIGHT - paddleh) < eMy && HEIGHT > eMy && (shipx + paddlew) > eMx){
 	hitU();
 }
+
+//Checks to see how many aliens are alive, the lower alive the harder it gets
 switch(aliensAlive){
-case 20:
-alienSpeed = alienSpeed+2.5;
-break;
-case 15:
-alienSpeed = alienSpeed+3;
-break;
-case 10:
-alienSpeed = alienSpeed+3.5;
-break;
-case 5:
-alienSpeed = alienSpeed+5;
-break;
+	case 20:
+		alienSpeed = alienSpeed+2.5;
+	break;
+	case 15:
+		alienSpeed = alienSpeed+3;
+	break;
+	case 10:
+		alienSpeed = alienSpeed+3.5;
+	break;
+	case 5:
+		alienSpeed = alienSpeed+5;
+	break;
 }
 /*--------------- E N D	  A L I E N   C O D E ---------------*/
 
@@ -311,7 +308,6 @@ for (b=0; b < nBarriers; b++) {
 function hit(row, col){
 	y =(HEIGHT-paddleh)+5;
 	x = shipx + (paddlew/2);
-	fireMissle = false;
 	ALIENS[row][col] = 0;
 	aliensAlive --;
 	score += 10;
@@ -321,7 +317,6 @@ function hitB(b){
 	barrier[b] -= 1;
 	y = (HEIGHT-paddleh)+5;
 	x = shipx + (paddlew/2);
-	fireMissle = false;
 }
 //Hit Function for barrier from the Enemy Missle
 function hitBE(b){
@@ -365,7 +360,8 @@ for (i=0; i < nRows; i++) {
 	}
 }
 
-}/*The End of the Draw Function*/
+}
+/*The End of the Draw Function*/
 
 //sends back to object.js
 function winRefresh(){
