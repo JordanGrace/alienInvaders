@@ -60,13 +60,9 @@ function draw(){
     Bullet.update();});
 	
 /*--------------- U S E R   C O D E ---------------*/  
-//If no key is pressed key will equal none
-function stopMove(){
-	key = "none";
-}
-
 //Keyboard Bindings
-Mousetrap.bind('space', function(){if(firePause == false){fire();}}, 'keydown');
+
+Mousetrap.bind('space', function(){fire();}, 'keyup');
 Mousetrap.bind('left', function(){key = "left";}, 'keydown');
 Mousetrap.bind('right', function(){key = "right";}, 'keydown');
 Mousetrap.bind('up', function(){key = "up";}, 'keydown');
@@ -100,6 +96,10 @@ switch(key){
 	break;			
  }
 
+//If no key is pressed key will equal none
+function stopMove(){
+	key = "none";
+}
 
 //If fireMissle is true the missle is not able to be moved
 function fire(){
@@ -306,8 +306,6 @@ for (b=0; b < nBarriers; b++) {
 /*--------------- H I T   F U N C T I O N   C O D E ---------------*/  
  //This is the Hit function for aliens
 function hit(row, col){
-	y =(HEIGHT-paddleh)+5;
-	x = shipx + (paddlew/2);
 	ALIENS[row][col] = 0;
 	aliensAlive --;
 	score += 10;
@@ -315,8 +313,6 @@ function hit(row, col){
 //Hit Function for barrier from the User Missle
 function hitB(b){
 	barrier[b] -= 1;
-	y = (HEIGHT-paddleh)+5;
-	x = shipx + (paddlew/2);
 }
 //Hit Function for barrier from the Enemy Missle
 function hitBE(b){

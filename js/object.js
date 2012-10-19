@@ -19,21 +19,24 @@ var nCols = 20;
 var nBarriers = 9;
 //Changes the Amount of Lives you can have
 var userLives = 3;
-//Sets the Width of the canvas
-var WIDTH = 960;
-//Sets the Height of the canvas
-var HEIGHT = 700;
-
+//sets the images for the objects in game
 var alienImage = '../alienInvaders/images/alien.png';
 var shipImage = '';
-
 /*----------------------------------Changes to the Variables below may break game----------------------------------*/
+//default variables for the creation of the canvas
 var canvas = document.createElement('canvas');
-var aliensAlive = ((nRows + 1) * nCols)/4 ;
-var x = 0;
-var y = 0;
 var ctx;
+
+//Sets the Width and Height of the canvas
+var WIDTH = $('#canvasWrap').width();
+var HEIGHT = $('#canvasWrap').height();
+
+//determines howmany aliens are alive
+var aliensAlive = ((nRows + 1) * nCols)/4 ;
+
+//The ships x cords
 var shipx;
+
 var intervalId = 0;
 var nextLvl = 0;
 var ALIENS;
@@ -47,16 +50,11 @@ var cn = 4;
 var rn = 4;
 var eMy = 0;
 var eMx = 0;
-var firePause = false;
 var moveObj = false;
 var eMfire = false;
 var ctt = 0;
 var playerBullets = [];
 var enemyBullets = [];
-
-
-
-function redraw(){}
 
 function Bullet(I) {
 	I.active = true;
@@ -72,7 +70,6 @@ function Bullet(I) {
 			ctx.beginPath();
 			ctx.fillStyle = 'white';
 			ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
-			//rect(this.x, this.y,3,5);
 			ctx.closePath();
 			ctx.fill();}
 		else{I.speed = 0;I.yVelocity = 0;}
@@ -169,13 +166,11 @@ function clear() {
 
 //The Start Function
 function init() {
-  canvas.height = HEIGHT;
-  canvas.width = WIDTH;
-  ctx = canvas.getContext("2d");
-  $('#canvasWrap').append(canvas);
-  shipx = 0;
-  x = shipx + (paddlew/2);
-  y = (HEIGHT-paddleh)+10;
-  intervalId = setInterval(draw, 1000/30);
-  return intervalId;
+  	ctx = canvas.getContext("2d");
+  	canvas.width = WIDTH;
+  	canvas.height = HEIGHT;
+  	$('#canvasWrap').append(canvas);
+  	shipx = 0;
+  	intervalId = setInterval(draw, 1000/30);
+  	return intervalId;
 }
