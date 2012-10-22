@@ -9,8 +9,8 @@ var alienSpeed = 2;
 var alienWidth = 30;
 var alienHeight = 25;
 //Changes the Size of your ship
-var paddleh = 30;
-var paddlew = 50;
+var shipH = 30;
+var shipW = 50;
 //Changes the Number of rows of aliens "Has to be Odd"
 var nRows = 9;
 //Changes the Number of Columns of aliens "Has to be Even"
@@ -87,13 +87,13 @@ function Bullet(I) {
 var Player = {
 	color: "white",
 	x: shipx,
-	y: HEIGHT-paddleh,
-	width: paddlew,
-	height: paddleh,
+	y: HEIGHT-shipH,
+	width: shipW,
+	height: shipH,
 	draw: function() {
 		ctx.beginPath();
 		ctx.fillStyle = Player.color;
-		ctx.rect(shipx, HEIGHT-paddleh, paddlew, paddleh);
+		ctx.rect(shipx, HEIGHT-shipH, shipW, shipH);
 		ctx.closePath();
 		ctx.fill();
 	}

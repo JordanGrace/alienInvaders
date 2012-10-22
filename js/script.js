@@ -78,7 +78,7 @@ Mousetrap.bind('p', function(){stopMove();}, 'keyup');
 //giving the keyboard binding some functions
 switch(key){
 	case "right":
-		if(shipx >= (WIDTH - paddlew)){}
+		if(shipx >= (WIDTH - shipW)){}
 		else{shipx += 5;}
 	break;
 	case "left":
@@ -91,7 +91,7 @@ switch(key){
 	case "down":
 		y += 5;
 	break;		
-	case "pause":
+	case "p":
 		pauseGame();
 	break;			
  }
@@ -106,8 +106,8 @@ function fire(){
 		score --;
 		playerBullets.push(Bullet({
 			number: playerBullets.length,
-			x: shipx + (paddlew/2),
-			y: (HEIGHT-paddleh)+10,
+			x: shipx + (shipW/2),
+			y: (HEIGHT-shipH)+10,
 			speed: 5
 		}));
 };
@@ -221,7 +221,7 @@ if(eMy >= HEIGHT){
 eMfire = false;
 }
 
-if(shipx < eMx && (HEIGHT - paddleh) < eMy && HEIGHT > eMy && (shipx + paddlew) > eMx){
+if(shipx < eMx && (HEIGHT - shipH) < eMy && HEIGHT > eMy && (shipx + shipW) > eMx){
 	hitU();
 }
 
@@ -253,19 +253,19 @@ var barrierH = 50;
 for (b=0; b < nBarriers; b++) {
 	switch(barrier[b]){
 	case 5:
-		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(paddleh + bulletSize)),barrierW,barrierH);
+		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(shipH + bulletSize)),barrierW,barrierH);
 		break;
 	case 4:
-		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(paddleh + bulletSize)),barrierW,barrierH - 10);
+		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(shipH + bulletSize)),barrierW,barrierH - 10);
 		break;
 	case 3:
-		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(paddleh + bulletSize)),barrierW,barrierH - 20);
+		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(shipH + bulletSize)),barrierW,barrierH - 20);
 		break;  
  	case 2:
-		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(paddleh + bulletSize)),barrierW,barrierH - 30);
+		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(shipH + bulletSize)),barrierW,barrierH - 30);
 		break;  
 	case 1:
-		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(paddleh + bulletSize)) ,barrierW,barrierH - 40);
+		rect(b * (WIDTH/nBarriers),HEIGHT - (3*(shipH + bulletSize)) ,barrierW,barrierH - 40);
 		break;   
 	}
 }
@@ -279,7 +279,7 @@ for (b=0; b < nBarriers; b++) {
 	if(b%2==0){}
 	else{
 		bp1x[b] = (b * barrierW);
-		bp2y[b] = HEIGHT - (3*(paddleh + bulletSize));
+		bp2y[b] = HEIGHT - (3*(shipH + bulletSize));
 		bp3y[b] = bp2y[b] + (barrier[b] * 10);
 		bp4x[b] = (b * barrierW) + barrierW;
 	}
@@ -348,7 +348,7 @@ for (i=0; i < nRows; i++) {
 	if(i%2==0){
 		for (j=0; j < nCols; j++) {
 			if(ALIENS[i][j] == 1){
-				if(alienDown + ((i + 1) * alienHeight) >= (HEIGHT - ((paddleh * 2) + bulletSize))){
+				if(alienDown + ((i + 1) * alienHeight) >= (HEIGHT - ((shipH * 2) + bulletSize))){
 					lose();
 				}
 			}
