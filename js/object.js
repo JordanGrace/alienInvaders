@@ -8,9 +8,6 @@ var alienSpeed = 2;
 //Changes the Aliens Width & Height (Height needs to be divisible by 5)
 var alienWidth = 30;
 var alienHeight = 25;
-//Changes the Size of your ship
-var shipH = 30;
-var shipW = 50;
 //Changes the Number of rows of aliens "Has to be Odd"
 var nRows = 9;
 //Changes the Number of Columns of aliens "Has to be Even"
@@ -36,7 +33,6 @@ var aliensAlive = ((nRows + 1) * nCols)/4 ;
 
 //The ships x cords
 var shipx;
-
 var intervalId = 0;
 var nextLvl = 0;
 var ALIENS;
@@ -56,11 +52,42 @@ var ctt = 0;
 var playerBullets = [];
 var enemyBullets = [];
 
+/*var Aliens = {
+	width: 30,
+	height: 25,
+	x:300,
+	y:500,
+	img:,
+	draw: function(){
+
+	ctx.drawImage(Aliens.img,Aliens.x,Aliens.y,Aliens.width,Aliens.height);
+
+	}
+}*/
+
+
+//Creating the player
+var Player = {
+	color: "white",
+	x: shipx,
+	y: HEIGHT-30,
+	width: 50,
+	height: 30,
+	draw: function() {
+		ctx.beginPath();
+		ctx.fillStyle = Player.color;
+		ctx.rect(shipx, HEIGHT-Player.height, Player.width, Player.height);
+		ctx.closePath();
+		ctx.fill();
+	}
+};
+
+//Created the Bullets
 function Bullet(I) {
 	I.active = true;
 	I.radius = 3;
 	I.xVelocity = 0;
-	I.yVelocity = -I.speed;
+	I.yVelocity = I.speed;
 	I.color = "white";
 	I.inBounds = function() {
 		return I.x >= 0 && I.x <= WIDTH && I.y >= 0 && I.y <= HEIGHT;
@@ -68,36 +95,19 @@ function Bullet(I) {
 	I.draw = function() {
 		if(I.active == true){
 			ctx.beginPath();
-			ctx.fillStyle = 'white';
+			ctx.fillStyle = I.color;
 			ctx.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 			ctx.closePath();
-			ctx.fill();}
-		else{I.speed = 0;I.yVelocity = 0;}
+			ctx.fill();
+		}else{I.speed = 0;I.yVelocity = 0;}
 	};
 	I.update = function() {
 		I.x += I.xVelocity;
 		I.y += I.yVelocity;
 		I.active = I.active && I.inBounds();
 	};
-   
   return I;
 }
-
-//Creating the player
-var Player = {
-	color: "white",
-	x: shipx,
-	y: HEIGHT-shipH,
-	width: shipW,
-	height: shipH,
-	draw: function() {
-		ctx.beginPath();
-		ctx.fillStyle = Player.color;
-		ctx.rect(shipx, HEIGHT-shipH, shipW, shipH);
-		ctx.closePath();
-		ctx.fill();
-	}
-};
 
 //Creates the Missle
 function circle(x,y,r) {

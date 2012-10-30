@@ -108,7 +108,8 @@ function fire(){
 			number: playerBullets.length,
 			x: shipx + (shipW/2),
 			y: (HEIGHT-shipH)+10,
-			speed: 5
+			who: 'player',
+			speed: -5
 		}));
 };
 //redraws the users ship
