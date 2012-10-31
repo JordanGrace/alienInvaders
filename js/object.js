@@ -1,6 +1,4 @@
 /*----------------------------------Things that can be Changed----------------------------------*/
-//Changes The Speed of your Missle
-var dy = 5;
 //Changes the size of the Missle
 var bulletSize = 3;
 //Changes the Aliens Speed
@@ -52,16 +50,20 @@ var ctt = 0;
 var playerBullets = [];
 var enemyBullets = [];
 
-/*var Aliens = {
-	width: 30,
-	height: 25,
-	x:300,
-	y:500,
-	img:,
-	draw: function(){
+/*
+var Aliens = [];
 
-	ctx.drawImage(Aliens.img,Aliens.x,Aliens.y,Aliens.width,Aliens.height);
-
+function Alien(A) = {
+	A.life: 1,
+	A.width: 30,
+	A.height: 25,
+	A.x:300,
+	A.y:500,
+	A.img:'../alienInvaders/images/alien.png',
+	A.draw: function(){
+		var alienImg = new Image();
+		ctx.drawImage(A.img,A.x,Aliens.y,A.width,A.height);
+		alienImg.src = A.img;
 	}
 }*/
 
@@ -92,6 +94,9 @@ function Bullet(I) {
 	I.inBounds = function() {
 		return I.x >= 0 && I.x <= WIDTH && I.y >= 0 && I.y <= HEIGHT;
 	};
+	/*I.hit = function() {
+		return I.x 
+	};*/
 	I.draw = function() {
 		if(I.active == true){
 			ctx.beginPath();
@@ -135,6 +140,13 @@ alienImg.src = alienImage;
 
 //Win Text
 function winner(){
+	clear();
+	//Drawing up the HighScore
+	txt("High Score: 9999", 10, 30);
+	//Drawing up the Score
+	txt("Score: "+score, 450, 30);
+	//Drawing up the Lives
+	txt("Lives: "+userLives, 800, 30);
 	ctx.beginPath();
 	ctx.font = "bold 30px sans-serif";
 	ctx.fillStyle = "white";
@@ -154,6 +166,7 @@ function winner(){
 }
 //Lose Test
 function lose(){
+	clear();
 	ctx.beginPath();
 	ctx.font = "bold 60px sans-serif";
 	ctx.fillStyle = "white";
