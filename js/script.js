@@ -19,7 +19,10 @@ function initALIENS() {
 	for(r=0; r < nRows; r++){
 		for(c=0; c < nCols; c++){
 			Aliens.push(Alien({
-
+				row:r,
+				col:c,
+				x:c * Alien.width,
+				y:r * Alien.height
 			}));
 		}
 	}
