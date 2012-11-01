@@ -1,6 +1,7 @@
 /*----------------------------------Things that can be Changed----------------------------------*/
 //Changes the size of the Missle
 var bulletSize = 3;
+var eMSpeed = 50;
 //Changes the Aliens Speed
 var alienSpeed = 2;
 //Changes the Aliens Width & Height (Height needs to be divisible by 5)
@@ -48,25 +49,22 @@ var moveObj = false;
 var eMfire = false;
 var ctt = 0;
 var playerBullets = [];
-var enemyBullets = [];
 
 /*
-var Aliens = [];
+var Aliens2 = [];
 
-function Alien(A) = {
-	A.life: 1,
-	A.width: 30,
-	A.height: 25,
-	A.x:300,
-	A.y:500,
-	A.img:'../alienInvaders/images/alien.png',
-	A.draw: function(){
+function Alien2(A) {
+	A.life = 1,
+	A.width = 30,
+	A.height = 25,
+	A.img = '../alienInvaders/images/alien.png',
+	A.draw = function(){
 		var alienImg = new Image();
-		ctx.drawImage(A.img,A.x,Aliens.y,A.width,A.height);
+		ctx.drawImage(A.img,A.x,A.y,A.width,A.height);
 		alienImg.src = A.img;
 	}
-}*/
-
+}
+*/
 
 //Creating the player
 var Player = {

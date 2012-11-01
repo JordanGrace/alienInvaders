@@ -15,21 +15,18 @@ function initALIENS() {
 			}
 		}
 	}
-	/*
-	for(r=0; r < nRows; r++){
-		for(c=0; c < nCols; c++){
-			Aliens.push(Alien({
+/*
+	for(r=1; r < nRows; r++){
+		for(c=1; c < nCols; c++){
+			Aliens2.push(Alien2({
 				row:r,
 				col:c,
-				x:c * Alien.width,
-				y:r * Alien.height
+				x:c * Alien2.width,
+				y:r * Alien2.height
 			}));
 		}
 	}
-
-
-
-	*/
+*/
 }
 
 //Creates the Barriers
@@ -58,11 +55,11 @@ function draw(){
 	playerBullets.forEach(function(Bullet) {
     Bullet.update();});
 
-    Aliens.forEach(function(Alien) {
-    Alien.draw();});
+   /* Aliens2.forEach(function(Alien2) {
+    Alien2.draw();});
 	
-	Aliens.forEach(function(Alien) {
-    Alien.update();});
+	Aliens2.forEach(function(Alien2) {
+    Alien2.update();});*/
 	
 /*--------------- U S E R   C O D E ---------------*/  
 //Keyboard Bindings
@@ -201,9 +198,9 @@ function draw(){
 			}
 		}
 	}
-
+eMfire++;
 //Checks to see if the Enemy Missle has been fired
-	if(!eMfire){
+	if(eMfire == eMSpeed){
 		eMx = -20;
 		eMy = 0;
 		cn = Math.floor(Math.random()*nCols);
@@ -212,20 +209,22 @@ function draw(){
 		if(cn%2 == 1 && rn%2 == 0 && ALIENS[rn][cn]== 1){
 			eMy = (((ap3y[rn][cn] - ap2y[rn][cn])/2) + ap2y[rn][cn]);
 			eMx = (((ap4x[rn][cn] - ap1x[rn][cn])/2) + ap1x[rn][cn]);
-			eMfire = true;
 			fire('alien',5,eMx,eMy);
 		}
+		eMfire = 0;
 	}
 
 	
 
 	playerBullets.forEach(function(Bullet) {
 		if(shipx < Bullet.x && (HEIGHT - Player.height) < Bullet.y && HEIGHT > Bullet.y && (shipx + Player.width) > Bullet.x && Bullet.who == 'alien'){
+			Bullet.active = false;
+			Bullet.x = 0;
+			Bullet.y = 0;
+			
 			hitU();
 		}
-		if(Bullet.y >= HEIGHT){
-		eMfire = false;
-	}
+		
 	})
 
 //Checks to see how many aliens are alive, the lower alive the harder it gets
@@ -316,17 +315,16 @@ function draw(){
 //Hit Function for barrier from the User Missle
 	function hitB(b){
 		barrier[b] -= 1;
-		eMfire = false;
+		
 	}
 //Hit Function for barrier from the Enemy Missle
 	function hitBE(b){
 		barrier[b] -= 1;
-		eMfire = false;
+		
 	}
 //Hit Function for User
 	function hitU(){
 		userLives --;
-		eMfire = false;
 		if(userLives == 0){
 			lose();
 		}
