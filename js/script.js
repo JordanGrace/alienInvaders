@@ -15,18 +15,18 @@ function initALIENS() {
 			}
 		}
 	}
-/*
-	for(r=1; r < nRows; r++){
-		for(c=1; c < nCols; c++){
+
+	for(r=1; r < 6; r++){
+		for(c=1; c < 11; c++){
 			Aliens2.push(Alien2({
-				row:r,
-				col:c,
-				x:c * Alien2.width,
-				y:r * Alien2.height
+				row: r,
+				col: c,
+				x: c * 60,
+				y: r * 50
 			}));
 		}
 	}
-*/
+
 }
 
 //Creates the Barriers

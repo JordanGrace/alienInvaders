@@ -50,21 +50,22 @@ var eMfire = false;
 var ctt = 0;
 var playerBullets = [];
 
-/*
+
 var Aliens2 = [];
 
-function Alien2(A) {
-	A.life = 1,
-	A.width = 30,
-	A.height = 25,
-	A.img = '../alienInvaders/images/alien.png',
-	A.draw = function(){
+function Alien2(I) {
+	I.life = 1,
+	I.width = 30,
+	I.height = 25,
+	I.img = '../alienInvaders/images/alien.png',
+	I.draw = function(){
 		var alienImg = new Image();
-		ctx.drawImage(A.img,A.x,A.y,A.width,A.height);
-		alienImg.src = A.img;
+		ctx.drawImage(I.img,I.x,I.y,I.width,I.height);
+		alienImg.src = I.img;
 	}
+	return I;
 }
-*/
+
 
 //Creating the player
 var Player = {
